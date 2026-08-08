@@ -48,6 +48,14 @@ h1{font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.055em;margin:
 .cart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.cart-head h2{font-size:28px}.cart-close{border:0;background:#f1f1f1;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:18px}
 .cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:18px 0;border-bottom:1px solid #eee}.cart-item h3{font-size:14px;margin:0 0 6px}.cart-item small{color:#777}.qty{display:flex;align-items:center;gap:8px;margin-top:10px}.qty button{border:1px solid #ddd;background:#fff;border-radius:50%;width:26px;height:26px;cursor:pointer}.remove{border:0;background:none;color:#888;font-size:11px;cursor:pointer;margin-top:8px}
 .cart-total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;padding:25px 0}.checkout{width:100%;border:0;background:#111;color:#fff;border-radius:999px;padding:15px;font-weight:800;cursor:pointer}.empty{color:#777;line-height:1.6;padding:30px 0}
+
+.checkout-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}
+.checkout-modal.open{display:flex}.checkout-box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:28px;padding:34px;position:relative}
+.checkout-box h2{font-size:38px;margin-bottom:10px}.checkout-box .intro{color:#666;margin-bottom:25px}.checkout-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800}.field input,.field textarea,.field select{border:1px solid #ddd;border-radius:10px;padding:12px;font:inherit;background:#fff}.field textarea{min-height:90px;resize:vertical}
+.order-summary{background:#f6f4f0;border-radius:18px;padding:20px;height:max-content}.order-summary h3{margin-top:0}.summary-line{display:flex;justify-content:space-between;gap:15px;padding:9px 0;font-size:13px}.summary-total{display:flex;justify-content:space-between;border-top:1px solid #ddd;padding-top:15px;margin-top:10px;font-weight:900}.checkout-actions{display:flex;gap:10px;margin-top:20px}.checkout-actions button{border:0;border-radius:999px;padding:14px 18px;font-weight:800;cursor:pointer}.submit-order{background:#111;color:#fff;flex:1}.cancel-order{background:#eee}.consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#666;margin-top:15px}.success{display:none;text-align:center;padding:45px 20px}.success.open{display:block}.success h2{font-size:40px;margin-bottom:12px}.legal-section{max-width:1000px;margin:auto;padding:80px 5%;line-height:1.7}.legal-section h2{margin-bottom:22px}.legal-section h3{margin-top:30px}.legal-section .placeholder{background:#fff3cd;border:1px solid #ffe69c;padding:15px;border-radius:12px;color:#664d03}.legal-nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:25px;font-size:13px}.legal-nav a{text-decoration:underline}
+@media(max-width:760px){.checkout-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.checkout-box{padding:25px}.checkout-box h2{font-size:30px}}
+
 </style>
 </head>
 <body>
@@ -128,7 +136,7 @@ h1{font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.055em;margin:
     <div><h4>KUNDENSERVICE</h4><a href="#">Kontakt</a><a href="#">Bestellung verfolgen</a><a href="#">Größentabelle</a><a href="#">Hilfe & FAQ</a></div>
     <div class="newsletter"><h4>NEWSLETTER</h4><p>Erhalte 10 % Rabatt auf deine erste Bestellung!</p><input type="email" placeholder="E-Mail-Adresse"><button>ANMELDEN</button></div>
   </div>
-  <div class="legal"><span>© 2026 WUFFWERK – Alle Rechte vorbehalten.</span><span>Impressum · Datenschutz · AGB</span></div>
+  <div class="legal"><span>© 2026 WUFFWERK – Alle Rechte vorbehalten.</span><span><a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="#widerruf">Widerruf</a> · <a href="#agb">AGB</a></span></div>
 </footer>
 
 <div class="overlay" id="overlay"></div>
@@ -322,11 +330,119 @@ h1{font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.055em;margin:
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
   document.getElementById('checkout').addEventListener('click', () => {
     if (!cart.length) return alert('Dein Warenkorb ist noch leer.');
-    alert('Checkout-Vorbereitung: Die Zahlungsabwicklung wird im nächsten Schritt angebunden.');
+    document.getElementById('checkoutModal').classList.add('open');
+    renderCheckoutSummary();
   });
 
   render();
 })();
 </script>
+
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <button class="modal-close" id="checkoutClose" aria-label="Checkout schließen">×</button>
+    <div id="checkoutFormView">
+      <h2>Bestellung abschließen.</h2>
+      <p class="intro">Deine Bestellung wird hier vorbereitet. Eine echte Zahlungsabwicklung ist noch nicht angeschlossen.</p>
+      <div class="checkout-grid">
+        <form id="orderForm">
+          <div class="form-grid">
+            <div class="field"><label for="firstName">Vorname *</label><input id="firstName" name="firstName" required></div>
+            <div class="field"><label for="lastName">Nachname *</label><input id="lastName" name="lastName" required></div>
+            <div class="field full"><label for="email">E-Mail *</label><input id="email" name="email" type="email" required></div>
+            <div class="field full"><label for="street">Straße & Hausnummer *</label><input id="street" name="street" required></div>
+            <div class="field"><label for="zip">PLZ *</label><input id="zip" name="zip" inputmode="numeric" required></div>
+            <div class="field"><label for="city">Ort *</label><input id="city" name="city" required></div>
+            <div class="field full"><label for="country">Land</label><select id="country" name="country"><option>Deutschland</option><option>Österreich</option><option>Schweiz</option></select></div>
+            <div class="field full"><label for="note">Bestellhinweis (optional)</label><textarea id="note" name="note" placeholder="z. B. Ablageort"></textarea></div>
+          </div>
+          <label class="consent"><input type="checkbox" required> <span>Ich bestätige, dass meine Angaben zur Bearbeitung der Bestellung verwendet werden. *</span></label>
+          <div class="checkout-actions"><button type="button" class="cancel-order" id="checkoutCancel">Zurück</button><button class="submit-order" type="submit">BESTELLUNG ABSENDEN</button></div>
+        </form>
+        <aside class="order-summary"><h3>Deine Bestellung</h3><div id="checkoutSummary"></div></aside>
+      </div>
+    </div>
+    <div class="success" id="orderSuccess">
+      <div style="font-size:50px">✓</div>
+      <h2>Bestellung vorbereitet.</h2>
+      <p>Danke! Dies ist aktuell nur eine Demo. Es wurde keine Zahlung ausgelöst und keine Bestellung an einen Lieferanten übertragen.</p>
+      <button class="checkout" id="successClose">Zurück zum Shop</button>
+    </div>
+  </div>
+</div>
+
+<section class="legal-section" id="impressum">
+  <h2>Impressum</h2>
+  <div class="placeholder"><strong>Vor dem Live-Verkauf ausfüllen:</strong> In dieses Feld gehören u. a. dein vollständiger Name/Firmenname, ladungsfähige Anschrift und Kontaktmöglichkeiten sowie – falls vorhanden – Handelsregister- und Umsatzsteuerangaben. Keine erfundenen Daten verwenden.</div>
+  <h3>Anbieter</h3>
+  <p>[Vor- und Nachname / Unternehmensname]<br>[Straße und Hausnummer]<br>[PLZ und Ort]<br>Deutschland</p>
+  <h3>Kontakt</h3>
+  <p>E-Mail: [E-Mail-Adresse]<br>Telefon: [Telefonnummer, sofern angegeben]</p>
+</section>
+
+<section class="legal-section" id="datenschutz">
+  <h2>Datenschutz</h2>
+  <div class="placeholder"><strong>Wichtig:</strong> Diese Seite ist eine Vorlage und keine fertige Rechtsberatung. Sobald Kontaktformular, Analytics, Newsletter, Zahlungsanbieter oder externe Dienste eingesetzt werden, muss die Datenschutzerklärung entsprechend ergänzt werden.</div>
+  <h3>Verantwortlicher</h3>
+  <p>[Name und vollständige Anschrift des Verantwortlichen]</p>
+  <h3>Bestellungen</h3>
+  <p>Bei einer Bestellung werden die zur Abwicklung erforderlichen Angaben verarbeitet. Welche Daten tatsächlich verarbeitet werden, hängt vom später eingesetzten Shopsystem, Zahlungsdienstleister und Versanddienstleister ab.</p>
+  <h3>Lokaler Warenkorb</h3>
+  <p>Der aktuelle Demo-Warenkorb wird ausschließlich im Browser mittels localStorage gespeichert. Es findet dadurch noch keine Übermittlung an WUFFWERK statt.</p>
+</section>
+
+<section class="legal-section" id="widerruf">
+  <h2>Widerrufsbelehrung</h2>
+  <div class="placeholder"><strong>Vor dem Verkauf rechtlich prüfen lassen.</strong> Die konkrete Widerrufsbelehrung einschließlich Muster-Widerrufsformular muss zu deinem Geschäftsmodell und den tatsächlich angebotenen Waren passen.</div>
+  <h3>Grundsatz</h3>
+  <p>Verbraucher haben bei Fernabsatzverträgen grundsätzlich ein gesetzliches Widerrufsrecht. Es gelten die gesetzlichen Ausnahmen und Fristen. Die konkrete Belehrung wird vor dem Livegang ergänzt.</p>
+</section>
+
+<section class="legal-section" id="agb">
+  <h2>AGB</h2>
+  <div class="placeholder"><strong>Noch nicht für den Verkauf verwenden.</strong> Die AGB müssen insbesondere zu Preisen, Vertragsschluss, Lieferung, Zahlungsarten, Eigentumsvorbehalt, Haftung und Widerruf zu deinem tatsächlichen Geschäftsmodell passen.</div>
+  <p>Die finale Fassung sollte vor dem ersten Verkauf erstellt und rechtlich geprüft werden.</p>
+  <div class="legal-nav"><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a><a href="#widerruf">Widerruf</a></div>
+</section>
+
+<script>
+(() => {
+  const modal = document.getElementById('checkoutModal');
+  const form = document.getElementById('orderForm');
+  const summary = document.getElementById('checkoutSummary');
+  const success = document.getElementById('orderSuccess');
+  const formView = document.getElementById('checkoutFormView');
+
+  function renderCheckoutSummary() {
+    if (!summary) return;
+    const current = JSON.parse(localStorage.getItem('wuffwerk-cart-v1') || '[]');
+    if (!current.length) {
+      summary.innerHTML = '<p>Warenkorb leer.</p>';
+      return;
+    }
+    const lines = current.map(i => `<div class="summary-line"><span>${i.qty} × ${String(i.name).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}</span><strong>${(i.price*i.qty).toLocaleString('de-DE',{minimumFractionDigits:2})} €</strong></div>`).join('');
+    const total = current.reduce((s,i)=>s+i.price*i.qty,0);
+    summary.innerHTML = lines + `<div class="summary-total"><span>Gesamt</span><span>${total.toLocaleString('de-DE',{minimumFractionDigits:2})} €</span></div>`;
+  }
+
+  function closeCheckout() { modal.classList.remove('open'); }
+  document.getElementById('checkoutClose').addEventListener('click', closeCheckout);
+  document.getElementById('checkoutCancel').addEventListener('click', closeCheckout);
+  document.getElementById('successClose').addEventListener('click', () => { success.classList.remove('open'); formView.style.display='block'; closeCheckout(); });
+  modal.addEventListener('click', e => { if (e.target === modal) closeCheckout(); });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const current = JSON.parse(localStorage.getItem('wuffwerk-cart-v1') || '[]');
+    if (!current.length) return alert('Dein Warenkorb ist leer.');
+    // Demo only: no data is sent to a server and no payment is taken.
+    formView.style.display = 'none';
+    success.classList.add('open');
+    localStorage.removeItem('wuffwerk-cart-v1');
+    if (typeof render === 'function') render();
+  });
+})();
+</script>
+
 </body>
 </html>
