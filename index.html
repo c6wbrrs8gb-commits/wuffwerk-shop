@@ -40,6 +40,14 @@ h1{font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.055em;margin:
 .product-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}.modal-grid{display:grid;grid-template-columns:1fr 1fr}.modal-photo{min-height:480px;background:#f4f2ee}.modal-copy{padding:45px}.modal-copy h2{font-size:38px;margin:8px 0 14px}.modal-copy .price{font-size:24px;margin:15px 0}.modal-copy p{color:#666;line-height:1.7}.modal-close{position:absolute;right:18px;top:18px;z-index:2;border:0;background:#fff;border-radius:50%;width:38px;height:38px;box-shadow:0 3px 15px rgba(0,0,0,.12);cursor:pointer;font-size:18px}
 .toast{position:fixed;left:50%;bottom:25px;z-index:100;background:#111;color:#fff;padding:12px 18px;border-radius:999px;font-size:13px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:700px){.modal-grid{grid-template-columns:1fr}.modal-photo{min-height:300px;max-height:350px}.modal-copy{padding:28px}.modal-copy h2{font-size:30px}}
+
+.cart-button{position:relative;cursor:pointer}.cart-count{position:absolute;top:-8px;right:-10px;background:#111;color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}
+.add-cart{width:100%;margin-top:12px;border:0;border-radius:999px;background:#111;color:#fff;padding:11px 8px;font-size:11px;font-weight:800;cursor:pointer;transition:.2s}.add-cart:hover{opacity:.82;transform:translateY(-1px)}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50;opacity:0;pointer-events:none;transition:.25s}.cart-overlay.open{opacity:1;pointer-events:auto}
+.cart-panel{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:#fff;padding:28px;overflow:auto;transform:translateX(100%);transition:.3s}.cart-overlay.open .cart-panel{transform:translateX(0)}
+.cart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.cart-head h2{font-size:28px}.cart-close{border:0;background:#f1f1f1;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:18px}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:18px 0;border-bottom:1px solid #eee}.cart-item h3{font-size:14px;margin:0 0 6px}.cart-item small{color:#777}.qty{display:flex;align-items:center;gap:8px;margin-top:10px}.qty button{border:1px solid #ddd;background:#fff;border-radius:50%;width:26px;height:26px;cursor:pointer}.remove{border:0;background:none;color:#888;font-size:11px;cursor:pointer;margin-top:8px}
+.cart-total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;padding:25px 0}.checkout{width:100%;border:0;background:#111;color:#fff;border-radius:999px;padding:15px;font-weight:800;cursor:pointer}.empty{color:#777;line-height:1.6;padding:30px 0}
 </style>
 </head>
 <body>
@@ -231,6 +239,93 @@ h1{font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.055em;margin:
   });
 
   renderCart();
+})();
+</script>
+
+<div class="cart-overlay" id="cartOverlay">
+  <aside class="cart-panel" aria-label="Warenkorb">
+    <div class="cart-head"><h2>Dein Warenkorb</h2><button class="cart-close" id="cartClose" aria-label="Warenkorb schließen">×</button></div>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>Zwischensumme</span><span id="cartTotal">0,00 €</span></div>
+    <button class="checkout" id="checkout">ZUR KASSE</button>
+  </aside>
+</div>
+<script>
+(() => {
+  const key = 'wuffwerk-cart-v1';
+  let cart = JSON.parse(localStorage.getItem(key) || '[]');
+  const overlay = document.getElementById('cartOverlay');
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  const countEl = document.getElementById('cartCount');
+
+  const save = () => localStorage.setItem(key, JSON.stringify(cart));
+  const euro = n => n.toLocaleString('de-DE', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+
+  function render() {
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    countEl.textContent = count;
+    countEl.style.display = count ? 'flex' : 'none';
+
+    if (!cart.length) {
+      itemsEl.innerHTML = '<div class="empty"><strong>Dein Warenkorb ist noch leer.</strong><br>Entdecke unsere Bestseller und füge dein Lieblingsprodukt hinzu.</div>';
+    } else {
+      itemsEl.innerHTML = cart.map((item, i) => `
+        <div class="cart-item">
+          <div>
+            <h3>${escapeHtml(item.name)}</h3>
+            <small>${euro(item.price)} pro Stück</small>
+            <div class="qty">
+              <button data-action="minus" data-index="${i}">−</button>
+              <strong>${item.qty}</strong>
+              <button data-action="plus" data-index="${i}">+</button>
+            </div>
+            <button class="remove" data-action="remove" data-index="${i}">Entfernen</button>
+          </div>
+          <strong>${euro(item.price * item.qty)}</strong>
+        </div>`).join('');
+    }
+    totalEl.textContent = euro(cart.reduce((sum, item) => sum + item.price * item.qty, 0));
+  }
+
+  function escapeHtml(value) {
+    return value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+
+  document.querySelectorAll('.add-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.name;
+      const price = Number(btn.dataset.price);
+      const existing = cart.find(item => item.name === name);
+      if (existing) existing.qty++;
+      else cart.push({name, price, qty:1});
+      save();
+      render();
+      overlay.classList.add('open');
+    });
+  });
+
+  itemsEl.addEventListener('click', e => {
+    const button = e.target.closest('[data-action]');
+    if (!button) return;
+    const i = Number(button.dataset.index);
+    const action = button.dataset.action;
+    if (action === 'plus') cart[i].qty++;
+    if (action === 'minus') cart[i].qty = Math.max(1, cart[i].qty - 1);
+    if (action === 'remove') cart.splice(i, 1);
+    save();
+    render();
+  });
+
+  document.getElementById('cartOpen').addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('cartClose').addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  document.getElementById('checkout').addEventListener('click', () => {
+    if (!cart.length) return alert('Dein Warenkorb ist noch leer.');
+    alert('Checkout-Vorbereitung: Die Zahlungsabwicklung wird im nächsten Schritt angebunden.');
+  });
+
+  render();
 })();
 </script>
 </body>
