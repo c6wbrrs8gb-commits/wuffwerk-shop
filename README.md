@@ -1,4 +1,4 @@
 # WUFFWERK
 
-Premium Hundezubehör.
+Hochwertiges Hundezubehör.
 

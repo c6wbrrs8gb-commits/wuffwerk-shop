@@ -1,302 +1,73 @@
-# WUFFWERK — Codex / Agent Instructions
+# WUFFWERK – Anweisungen für Codex und Agenten
 
-## 1. Project goal
+## Projektziel
 
-WUFFWERK is a German premium-style online shop for dog accessories.
+WUFFWERK ist ein deutscher Onlineshop für hochwertiges Hundezubehör. Das Projekt soll einfach wartbar, schnell, mobilfreundlich, hochwertig gestaltet, für GitHub Pages geeignet und möglichst kostengünstig bleiben. Als Geschäftsmodell ist Direktversand statt Lagerhaltung vorgesehen.
 
-The project should remain:
-- simple to maintain
-- fast
-- mobile-friendly
-- visually premium
-- suitable for GitHub Pages
-- as cost-efficient as possible
+## Projektarchiv und Technik
 
-The current business model is intended to use dropshipping rather than holding inventory.
+- Projektarchiv: `OrdinaryOnonas/wuffwerk-shop`
+- Standard-Branch: `main`
+- Die Website ist eine statische GitHub-Pages-Website.
+- Bevorzugt werden HTML5, CSS3 und reines JavaScript.
 
-## 2. Repository
+Keinen Server, keine Datenbank, kein Build-System, kein Framework und keinen kostenpflichtigen Dienst ohne ausdrückliche Anforderung hinzufügen. React, Vue, Next.js, Node-Build-Werkzeuge, Tailwind und Bootstrap nur nach ausdrücklicher Freigabe verwenden. `index.html` muss ohne zusätzliche Werkzeuge nutzbar bleiben.
 
-Repository:
-`OrdinaryOnonas/wuffwerk-shop`
+## Gestaltung und Tonalität
 
-Default branch:
-`main`
+WUFFWERK soll klar, modern und hochwertig wirken, mit großzügigen Freiräumen, deutlicher Typografie, abgerundeten Karten, dezenten Schatten, zurückhaltenden Farben, großen Produktbildern und leichten Animationen. Die Marke bleibt **WUFFWERK**; die Ansprache ist modern, vertrauenswürdig, freundlich, hochwertig und hundebezogen. Die Website darf nicht wie eine beliebige Vorlage oder ein Marktplatz wirken.
 
-The site is intended to run as a static GitHub Pages website.
+## Produkte und Bilder
 
-Do not introduce a server, database, build system, framework, or paid service unless explicitly requested.
+Produkte benötigen deutsche Namen, kurze nutzenorientierte Beschreibungen, realistische Preise, hochwertige Bilder, klare Schaltflächen und mobilfreundliche Darstellung. Niemals Lieferantenpreise, Lieferzeiten, Bewertungen, Zertifikate, Spezifikationen, Garantien oder Lagerbestände erfinden. Unbekannte Angaben konfigurierbar lassen oder klar als zu prüfen kennzeichnen.
 
-## 3. Technology rules
+Realistische Produktfotografie verwenden; keine offensichtlich künstlichen Platzhalterbilder im fertigen Shop. KI-Bilder müssen realistisch sein, zur Marke passen und dürfen weder ein konkretes Lieferantenprodukt vortäuschen noch gefälschte Kundenbewertungen erzeugen.
 
-Prefer:
-- HTML5
-- CSS3
-- vanilla JavaScript
+## Warenkorb und Bestellung
 
-Avoid adding React, Vue, Next.js, Node build tooling, Tailwind, Bootstrap, or other frameworks unless explicitly requested.
+Der Warenkorb muss Produkte hinzufügen, Mengen ändern und Produkte entfernen können, Zwischensumme und Gesamtsumme zeigen, mobil funktionieren und bei Bedarf lokal im Browser gespeichert werden. Für den statischen Warenkorb `localStorage` nutzen, aber niemals sensible Zahlungsdaten dort speichern.
 
-Keep the project usable by simply opening/deploying `index.html`.
+Der aktuelle Bestellablauf ist nur eine Demonstration. Bis ein echter Zahlungs- und Serverdienst ausdrücklich beauftragt ist, keine Zahlung oder echte Bestellung behaupten, keine Kundendaten an Dritte übermitteln und keine Zahlungsdaten speichern. Für eine echte Bestellung einen geeigneten Zahlungsanbieter und eine serverseitige Verarbeitung einsetzen. Niemals Kreditkartendaten direkt im JavaScript der Website verarbeiten.
 
-If additional files are necessary, keep the structure simple and explain why they are needed.
+## Rechtliches und Datenschutz
 
-## 4. Design language
+Impressum, Datenschutz, Widerruf und AGB sind Platzhalter, bis die tatsächlichen Unternehmens- und Rechtsdaten vorliegen. Niemals Firmendaten, Anschriften, Umsatzsteuer-IDs, Registernummern oder Rechtsbehauptungen erfinden. Vor dem Verkaufsstart klar auf die notwendige Finalisierung der Rechtstexte hinweisen.
 
-WUFFWERK should have a premium, clean aesthetic inspired by modern Apple-style product presentation.
+Nie API-Schlüssel, Passwörter oder andere Geheimnisse im Projekt speichern, private Zugangsdaten veröffentlichen oder Kundendaten an unbekannte Dienste schicken. Falls ein Geheimnis erforderlich ist, zuerst eine sichere Architektur erklären statt es in `index.html` einzufügen.
 
-Design principles:
-- generous whitespace
-- strong typography hierarchy
-- rounded cards
-- subtle shadows
-- restrained use of color
-- large product imagery
-- smooth but lightweight animations
-- excellent mobile layout
-- clear calls to action
+## Direktversand und Kosten
 
-Do not turn the site into a generic template or marketplace.
+Lieferanten aus Deutschland oder der EU bevorzugen. Auf kurze Lieferzeiten nach Deutschland, verlässliche Lieferanten, transparente Produktdaten, angemessene Versandkosten, gute Bewertungen, geringes Retourenrisiko und ausreichende Marge achten. Produkte nicht nur wegen eines günstigen Einkaufspreises veröffentlichen.
 
-Brand name:
-**WUFFWERK**
+Immer berücksichtigen:
 
-Tone:
-- modern
-- trustworthy
-- friendly
-- premium
-- dog-focused
+`Verkaufspreis - Produktkosten - Versand - Zahlungsgebühren - erwartete Retouren - Steuern = realistischer Deckungsbeitrag`
 
-## 5. Product presentation
+Eine geschätzte Marge niemals als garantierten Gewinn darstellen. Die derzeitige Produktausrichtung umfasst Schnüffelmatten, Reise-Trinkflaschen, Beschäftigungsspielzeug, LED-Halsbänder und -Leinen sowie Autoschutzdecken. Händlerpreise von ZooDrop / Pet-Star erst nach Händlerregistrierung verwenden.
 
-Products should have:
-- clear German names
-- concise benefit-focused descriptions
-- realistic pricing
-- high-quality product imagery
-- useful product highlights
-- clear CTA buttons
-- mobile-friendly layouts
+## Qualität, Barrierefreiheit und Änderungen
 
-Never invent:
-- supplier prices
-- delivery times
-- reviews
-- certifications
-- product specifications
-- guarantees
-- stock levels
+Code lesbar, gut strukturiert, angemessen kommentiert, barrierearm, responsiv und schlank halten. Funktionierende Abläufe bei Änderungen erhalten, unnötige Duplikate vermeiden und das vorhandene Verhalten vor einem Austausch verstehen.
 
-If information is unknown, leave it configurable or clearly mark it as needing confirmation.
+Semantisches HTML, Beschriftungen für Formularfelder, tastaturbedienbare Elemente, aussagekräftige Alternativtexte, ausreichende Kontraste und sichtbare Fokuszustände verwenden. Wichtige Informationen nie ausschließlich über Farbe vermitteln.
 
-Supplier/product data must be treated as external data and verified before being presented as fact.
+Bei jeder Änderung:
 
-## 6. Images
+1. Vorhandenen Code prüfen.
+2. Funktionierende Abläufe bewahren.
+3. Die kleinste sinnvolle Änderung vornehmen.
+4. Betroffene Funktionen testen.
+5. Desktop- und Mobilansicht prüfen.
+6. Änderungen erklären.
 
-Use realistic product photography where possible.
+Die gesamte Website nicht ohne Not neu schreiben.
 
-Do not use obviously fake placeholder images in the finished storefront.
+## Git und GitHub
 
-If AI-generated imagery is used:
-- it should look realistic
-- it must fit the WUFFWERK visual identity
-- it should not falsely imply a specific supplier's exact product unless the image actually represents that product
-- do not create fake customer reviews or fake user testimonials using AI imagery
+Klare Commit-Nachrichten verwenden, kleine verständliche Commits bevorzugen und niemals ohne ausdrückliche Anweisung einen erzwungenen Push oder eine Überschreibung der Historie durchführen.
 
-## 7. Shopping cart
+Codex darf auf Wunsch Projektstand und GitHub verwalten, einschließlich Branches, Commits, Pushes, Pull Requests und Issues. Vor irreversiblen oder weitreichenden Schritten – etwa dem Löschen von Remote-Branches oder Dateien, einem erzwungenen Push, dem Zusammenführen eines Pull Requests, Änderungen an Repository-Einstellungen oder Veröffentlichungen – Ziel exakt nennen und die ausdrückliche Freigabe des Eigentümers einholen. Nach jeder GitHub-Aktion Branch, Commit, Pull Request, Issue oder Datei mitteilen.
 
-The cart should:
-- allow adding products
-- allow changing quantities
-- allow removing products
-- show subtotal/total
-- work on mobile
-- persist locally where appropriate
+## Vorrangregel
 
-Use `localStorage` for a simple static-site cart unless a real backend is explicitly introduced.
-
-Do not collect or store sensitive payment information in localStorage.
-
-## 8. Checkout
-
-The current checkout is a frontend/demo checkout.
-
-Until a real payment/backend system is explicitly implemented:
-- do not claim that payment was processed
-- do not claim that an order was actually submitted
-- do not transmit customer data to third parties
-- do not store payment credentials
-
-When implementing a real checkout, use a proper payment provider and server-side order handling.
-
-Never implement raw credit-card handling in frontend JavaScript.
-
-## 9. Legal pages
-
-The project may contain:
-- Impressum
-- Datenschutz
-- Widerrufsbelehrung
-- AGB
-
-These are placeholders until the owner's actual business details and legal requirements are supplied.
-
-Never invent company details, addresses, VAT IDs, registration numbers, or legal claims.
-
-Before the store goes live, clearly indicate that the legal texts need to be finalized.
-
-## 10. Dropshipping rules
-
-The intended model is dropshipping.
-
-Preferred suppliers:
-- Germany
-- EU
-
-Prioritize:
-- short delivery times to Germany
-- reliable suppliers
-- transparent product data
-- reasonable shipping costs
-- good supplier ratings
-- low return risk
-- products with sufficient margin
-
-Do not publish a product merely because the wholesale price looks cheap.
-
-Always evaluate:
-
-`selling price - product cost - shipping - payment fees - expected returns - taxes = realistic contribution`
-
-Never present an estimated margin as guaranteed profit.
-
-## 11. Current product direction
-
-The current product strategy focuses on a small selection of dog accessories.
-
-Ideas previously considered:
-- snuffle mats
-- travel water bottles
-- interactive dog toys
-- LED collars/leashes
-- car protection covers
-
-The current preference is to find German/EU suppliers before using expensive overseas suppliers.
-
-ZooDrop / Pet-Star was identified as a German supplier candidate. Its actual merchant prices must be verified through the merchant account before using them in calculations.
-
-## 12. Zero-budget constraint
-
-The project is being developed with a target of approximately 0 € upfront investment.
-
-Therefore:
-- prefer free hosting such as GitHub Pages
-- avoid unnecessary SaaS subscriptions
-- avoid paid plugins unless explicitly approved
-- do not recommend buying a domain until the user decides to do so
-- prefer free/open-source tooling
-
-Do not sacrifice security or legal compliance merely to save money.
-
-## 13. Code quality
-
-Keep code:
-- readable
-- well structured
-- reasonably commented
-- accessible
-- responsive
-- lightweight
-
-Avoid unnecessary duplication.
-
-Do not break existing functionality when changing the design.
-
-Before replacing a working component, understand its existing behavior.
-
-## 14. Accessibility
-
-Use:
-- semantic HTML
-- labels for form fields
-- keyboard-accessible controls
-- useful alt text
-- sufficient contrast
-- visible focus states
-
-Do not rely on color alone to communicate important information.
-
-## 15. Security and privacy
-
-Never:
-- hard-code API keys
-- commit passwords or secrets
-- expose private credentials
-- collect payment credentials in frontend code
-- send customer data to unknown services
-
-If an API or secret is required, stop and explain the required secure architecture instead of putting the secret into `index.html`.
-
-## 16. Change policy
-
-When modifying the project:
-1. Inspect the existing code first.
-2. Preserve working functionality.
-3. Make the smallest sensible change.
-4. Test the affected behavior.
-5. Check desktop and mobile layouts.
-6. Explain what changed.
-
-Do not rewrite the entire site unnecessarily.
-
-## 17. Git workflow
-
-Use clear commit messages.
-
-Examples:
-- `feat: add snuffle mat product`
-- `fix: repair mobile cart`
-- `style: improve product cards`
-- `docs: update agent instructions`
-
-Do not force-push or overwrite history unless explicitly requested.
-
-Prefer small, understandable commits.
-
-## 18. Future development priorities
-
-Recommended order:
-
-1. Verify German/EU suppliers
-2. Select 3–5 profitable products
-3. Add real product information and images
-4. Improve product detail pages
-5. Implement a real order backend
-6. Add a legitimate payment provider
-7. Add order confirmation emails
-8. Finalize legal pages
-9. Test checkout thoroughly
-10. Connect a domain
-11. Launch marketing/social content
-
-## 19. Important rule for Codex
-
-When asked to modify WUFFWERK, treat this file as the project-specific source of truth.
-
-Do not:
-- change the brand name
-- remove existing core shop functionality
-- introduce unnecessary frameworks
-- invent business information
-- invent supplier information
-- claim that demo checkout functionality is a real payment system
-- add paid services without approval
-
-When requirements conflict, prioritize the user's newest explicit request while preserving security, privacy, legal compliance, and existing functionality.
-
-## 20. GitHub operations
-
-Codex handles GitHub operations for the project on the owner's behalf, including inspecting repository state, creating branches, committing, pushing, opening and updating pull requests, and managing issues when requested.
-
-Before irreversible or high-impact actions — deleting remote branches or files, force-pushing, merging pull requests, changing repository settings, or publishing releases — Codex must state the exact target and obtain the owner's explicit confirmation.
-
-Codex must keep the owner informed about each completed GitHub action, including the affected branch, commit, pull request, issue, or file.
+Diese Datei ist die projektspezifische Grundlage für Änderungen an WUFFWERK. Markenname und Kernfunktionen nicht entfernen, keine unnötigen Frameworks oder kostenpflichtigen Dienste einführen und keine Geschäfts- oder Lieferanteninformationen erfinden. Die neueste ausdrückliche Anforderung des Nutzers hat Vorrang, solange Sicherheit, Datenschutz, rechtliche Vorgaben und bestehende Funktionen gewahrt bleiben.
