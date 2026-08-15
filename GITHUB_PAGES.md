@@ -1,4 +1,4 @@
-# WUFFWERK – Veröffentlichung mit GitHub Pages
+# Hütepfote – Veröffentlichung mit GitHub Pages
 
 Projektarchiv:
 https://github.com/c6wbrrs8gb-commits/wuffwerk-shop

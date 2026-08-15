@@ -1,4 +1,4 @@
-# WUFFWERK
+# Hütepfote
 
 Hochwertiges Hundezubehör.
 

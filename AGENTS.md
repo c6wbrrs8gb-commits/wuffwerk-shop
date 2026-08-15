@@ -1,8 +1,8 @@
-# WUFFWERK – Anweisungen für Codex und Agenten
+# Hütepfote – Anweisungen für Codex und Agenten
 
 ## Projektziel
 
-WUFFWERK ist ein deutscher Onlineshop für hochwertiges Hundezubehör. Das Projekt soll einfach wartbar, schnell, mobilfreundlich, hochwertig gestaltet, für GitHub Pages geeignet und möglichst kostengünstig bleiben. Als Geschäftsmodell ist Direktversand statt Lagerhaltung vorgesehen.
+Hütepfote ist ein deutscher Onlineshop für hochwertiges Hundezubehör. Das Projekt soll einfach wartbar, schnell, mobilfreundlich, hochwertig gestaltet, für GitHub Pages geeignet und möglichst kostengünstig bleiben. Als Geschäftsmodell ist Direktversand statt Lagerhaltung vorgesehen.
 
 ## Projektarchiv und Technik
 
@@ -15,7 +15,7 @@ Keinen Server, keine Datenbank, kein Build-System, kein Framework und keinen kos
 
 ## Gestaltung und Tonalität
 
-WUFFWERK soll klar, modern und hochwertig wirken, mit großzügigen Freiräumen, deutlicher Typografie, abgerundeten Karten, dezenten Schatten, zurückhaltenden Farben, großen Produktbildern und leichten Animationen. Die Marke bleibt **WUFFWERK**; die Ansprache ist modern, vertrauenswürdig, freundlich, hochwertig und hundebezogen. Die Website darf nicht wie eine beliebige Vorlage oder ein Marktplatz wirken.
+Hütepfote soll klar, modern und hochwertig wirken, mit großzügigen Freiräumen, deutlicher Typografie, abgerundeten Karten, dezenten Schatten, zurückhaltenden Farben, großen Produktbildern und leichten Animationen. Die Marke bleibt **Hütepfote**; die Ansprache ist modern, vertrauenswürdig, freundlich, hochwertig und hundebezogen. Die Website darf nicht wie eine beliebige Vorlage oder ein Marktplatz wirken.
 
 ## Produkte und Bilder
 
@@ -70,4 +70,4 @@ Codex darf auf Wunsch Projektstand und GitHub verwalten, einschließlich Branche
 
 ## Vorrangregel
 
-Diese Datei ist die projektspezifische Grundlage für Änderungen an WUFFWERK. Markenname und Kernfunktionen nicht entfernen, keine unnötigen Frameworks oder kostenpflichtigen Dienste einführen und keine Geschäfts- oder Lieferanteninformationen erfinden. Die neueste ausdrückliche Anforderung des Nutzers hat Vorrang, solange Sicherheit, Datenschutz, rechtliche Vorgaben und bestehende Funktionen gewahrt bleiben.
+Diese Datei ist die projektspezifische Grundlage für Änderungen an Hütepfote. Markenname und Kernfunktionen nicht entfernen, keine unnötigen Frameworks oder kostenpflichtigen Dienste einführen und keine Geschäfts- oder Lieferanteninformationen erfinden. Die neueste ausdrückliche Anforderung des Nutzers hat Vorrang, solange Sicherheit, Datenschutz, rechtliche Vorgaben und bestehende Funktionen gewahrt bleiben.

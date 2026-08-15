@@ -1,4 +1,4 @@
-# WUFFWERK – Projektübersicht
+# Hütepfote – Projektübersicht
 
 Aktueller Stand:
 - hochwertige Startseite

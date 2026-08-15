@@ -1,4 +1,4 @@
-# WUFFWERK – Produktrecherche
+# Hütepfote – Produktrecherche
 
 Vorauswahl:
 - Schnüffelmatte
