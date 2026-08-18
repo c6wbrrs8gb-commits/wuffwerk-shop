@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produkte | Hütepfote</title>
+  <style>
+    :root{--pine:#18231b;--sage:#81963b;--cream:#f5f3ef;--line:#d9e1c1}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eef2dc 0%,#f7f8ed 38%,#f8f7ef 100%);color:var(--pine);font-family:Arial,Helvetica,sans-serif}.site-header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 6%;background:#fffdf9;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--pine);font-size:22px;font-weight:800;letter-spacing:.04em}.brand img{width:34px;height:34px;object-fit:contain}.back{color:var(--pine);font-weight:700;text-decoration:none;border:1px solid var(--pine);border-radius:999px;padding:11px 17px}.back:hover,.back:focus{background:var(--pine);color:#fff}.hero{padding:68px 6% 28px;max-width:1300px;margin:auto}.eyebrow{margin:0 0 12px;color:#607326;font-size:13px;letter-spacing:.12em;font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(40px,6vw,72px);letter-spacing:-.055em;line-height:.95;margin:0 0 18px}.hero p{max-width:610px;margin:0;color:#526056;font-size:18px;line-height:1.6}.filters{display:flex;gap:10px;flex-wrap:wrap;padding:18px 6% 42px;max-width:1300px;margin:auto}.filter{appearance:none;background:#fffdf9;border:1px solid var(--line);border-radius:999px;padding:11px 16px;color:var(--pine);font-weight:700;cursor:pointer}.filter:hover,.filter:focus,.filter.active{background:var(--pine);border-color:var(--pine);color:#fff}.catalog{max-width:1300px;margin:0 auto;padding:0 6% 88px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.product{background:#fffdf9;border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 35px rgba(42,58,27,.08)}.product[hidden]{display:none}.product img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f1f2ea}.product-copy{padding:20px;display:flex;flex-direction:column;flex:1}.product-category{margin:0 0 8px;color:#687c31;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.product h2{font-size:20px;line-height:1.17;margin:0 0 11px}.product p{color:#58645a;font-size:15px;line-height:1.48;margin:0 0 20px}.product a{margin-top:auto;display:inline-flex;justify-content:center;text-decoration:none;background:var(--pine);color:#fff;border-radius:999px;padding:12px 15px;font-weight:800}.product a:hover,.product a:focus{background:#607326}.empty{grid-column:1/-1;border:1px dashed #aab889;border-radius:18px;padding:32px;background:#fffdf9;color:#526056}@media(max-width:900px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.site-header{padding:16px 5%}.brand{font-size:19px}.hero{padding:50px 5% 20px}.filters,.catalog{padding-left:5%;padding-right:5%}.catalog{grid-template-columns:1fr}.back{padding:9px 12px;font-size:14px}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Zur Startseite von Hütepfote"><img src="assets/huetepfote-logo-mark.png" alt="">Hütepfote</a>
+    <a class="back" href="index.html#kategorien">← Zur Startseite</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Hütepfote Auswahl</p>
+      <h1 id="catalog-title">Unsere Produkte</h1>
+      <p id="catalog-intro">Entdecke die aktuelle Auswahl von Hütepfote. Wähle eine Kategorie, um passende Produkte zu sehen.</p>
+    </section>
+    <nav class="filters" aria-label="Produktkategorien">
+      <button class="filter active" type="button" data-filter="all">Alle Produkte</button>
+      <button class="filter" type="button" data-filter="hundebetten">Hundebetten</button>
+      <button class="filter" type="button" data-filter="geschirre">Geschirre &amp; Leinen</button>
+      <button class="filter" type="button" data-filter="spielzeug">Spielzeug</button>
+      <button class="filter" type="button" data-filter="futter">Futternäpfe &amp; Zubehör</button>
+    </nav>
+    <section class="catalog" aria-live="polite">
+      <article class="product" data-category="hundebetten"><img src="https://www.zoodrop.de/out/pictures/generated/product/1/665_665_100/37990.jpg" alt="Trixie Reisedecke Leni in Grau" loading="lazy"><div class="product-copy"><div class="product-category">Hundebetten</div><h2>Trixie Reisedecke Leni</h2><p>Gesteppte Reisedecke für entspannte Pausen unterwegs.</p><a href="https://www.zoodrop.de/Hundewelt/Betten-Koerbe/Liegedecken/Trixie-Reisedecke-Leni-grau.html" target="_blank" rel="noopener">Produkt ansehen</a></div></article>
+      <article class="product" data-category="geschirre"><img src="https://www.zoodrop.de/out/pictures/generated/product/1/665_665_100/32292.jpg" alt="Trixie BE NORDIC Snack-Tasche in Schwarz" loading="lazy"><div class="product-copy"><div class="product-category">Geschirre &amp; Leinen</div><h2>Trixie BE NORDIC Snack-Tasche</h2><p>Praktisches Zubehör für Training und Spaziergang.</p><a href="https://www.zoodrop.de/Hundewelt/Erziehung/Gurt-und-Futtertaschen/Trixie-BE-NORDIC-Snack-Tasche-Schwarz.html" target="_blank" rel="noopener">Produkt ansehen</a></div></article>
+      <article class="product" data-category="spielzeug"><img src="https://www.zoodrop.de/out/pictures/generated/product/1/665_665_100/5414365440749_prd_webl1.jpg" alt="Duvoplus Snackspielzeug Melone" loading="lazy"><div class="product-copy"><div class="product-category">Spielzeug</div><h2>Duvoplus Snackspielzeug Melone</h2><p>Nachfüllbares Beschäftigungsspielzeug für trockene Snacks.</p><a href="https://www.zoodrop.de/Hundewelt/Hundespielzeug-Sport/Intelligenz/Duvoplus-Snackspielzeug-Melone.html" target="_blank" rel="noopener">Produkt ansehen</a></div></article>
+      <article class="product" data-category="futter"><img src="https://www.zoodrop.de/out/pictures/generated/product/1/665_665_100/5414365456818_prd_webl.jpg" alt="Duvoplus Reise-Trinkflasche Silikon in Grau" loading="lazy"><div class="product-copy"><div class="product-category">Futternäpfe &amp; Zubehör</div><h2>Duvoplus Reise-Trinkflasche Silikon</h2><p>500-ml-Trinkflasche für Wasser unterwegs, mit Trageriemen.</p><a href="https://www.zoodrop.de/index.php?cl=details&amp;cnid=14547f4ddebf2d824.29052006&amp;anid=eaf8cfe0a2c8ec8a894f1798927a20d6&amp;listtype=search&amp;searchparam=Trinkflasche" target="_blank" rel="noopener">Produkt ansehen</a></div></article>
+      <p class="empty" id="empty" hidden>Für diese Kategorie wird die Produktauswahl gerade ergänzt.</p>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const labels={all:'Unsere Produkte',hundebetten:'Hundebetten',geschirre:'Geschirre & Leinen',spielzeug:'Spielzeug',futter:'Futternäpfe & Zubehör'};
+      const cards=[...document.querySelectorAll('.product')]; const buttons=[...document.querySelectorAll('.filter')]; const empty=document.getElementById('empty'); const title=document.getElementById('catalog-title');
+      function select(category){const valid=labels[category]?category:'all';let visible=0;cards.forEach(card=>{const show=valid==='all'||card.dataset.category===valid;card.hidden=!show;if(show)visible++});buttons.forEach(button=>button.classList.toggle('active',button.dataset.filter===valid));empty.hidden=visible!==0;title.textContent=labels[valid];history.replaceState(null,'',valid==='all'?'produkte.html':`produkte.html?kategorie=${encodeURIComponent(valid)}`)}
+      buttons.forEach(button=>button.addEventListener('click',()=>select(button.dataset.filter)));
+      select(new URLSearchParams(location.search).get('kategorie')||'all');
+    })();
+  </script>
+</body>
+</html>
